@@ -26,6 +26,9 @@ Rails 5.2.4.4
 　□会員のうちの購入者数を表示【中】<br>
 　□割安/割高を示すPERと割安・並・割高のアイコン、100株の取得価格を表示【高】<br>
 　□東証の株価DBとAPI連携し、リアルタイムの株価（100株の取得価格）を表示【低】<br>
+□優待詳細表示機能<br>
+　□項目や実装優先度は一覧と同じ<br>
+　□一rンに加えて、100株取得価格の推移グラフを表示【高】<br>
 □優待投稿機能（サイト運営者のみ登録可能）<br>
 　□写真、解説は必須【高】<br>
 □優待編集機能（サイト運営者のみ登録可能）【高】<br>
@@ -37,6 +40,9 @@ Rails 5.2.4.4
 □優待に対するコメント編集機能【高】<br>
 　□優待編集・削除はコメントした本人のみ可能【高】<br>
 □コメント機能とお気に入り機能についてはページ遷移なしで実行できる【高】<br>
+
+## カタログ設計
+https://drive.google.com/file/d/1rxCc-GHlGobd9UPFUROOD0c_cjDQHPHR/view?usp=sharing
 
 ## テーブル定義、ER図
 https://drive.google.com/file/d/1eDe_OFLUGY6n3YEm33Hc-_hkK6_qnHxZ/view?usp=sharing
@@ -53,3 +59,10 @@ https://drive.google.com/file/d/1rFK3P-VOjw_EF4zcT5DBqHVy3tkIkwgF/view?usp=shari
 * gem 'faker'
 * devise
 * kaminari
+
+## 使用予定の「就職term」技術
+* devise
+* コメント機能
+
+## カリキュラム外で取り入れる技術（使用予定）
+* Chartkickを使用予定。
