@@ -1,0 +1,45 @@
+<%= form_with(model: @special, local: true, url: choose_new_or_edit) do |form| %>
+  <% if @special.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @special.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @special.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="special_title">
+    <%= form.label :"優待製品名" %>
+    <%= form.text_field :product %>
+  </div>
+  <div class="special_title">
+    <%= form.label :"会社名" %>
+    <%= form.text_field :company %>
+  </div>
+  <div class="special_title">
+    <%= form.label :"優待製品写真" %>
+    <%= form.file_field :image %>
+  </div>
+  <div class="special_title">
+    <%= form.label :"優待解説" %>
+    <%= form.text_area :detail, :size=>"100x5" %>
+  </div>
+  <div class="special_title">
+    <%= form.label :PER %>
+    <%= form.text_field :per %>
+  </div>
+  <div class="special_title">
+    <%= form.label :"割安状況" %>
+    <%= form.text_field :status %>
+  </div>
+  <div class="special_title">
+    <%= form.label :"100株の取得価格" %>
+    <%= form.text_field :price %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+<%= link_to "優待記事一覧画面にもどる", specials_path %>
