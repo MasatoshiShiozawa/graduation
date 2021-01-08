@@ -3,7 +3,7 @@
     <% if comment.id.present? %>
       <li>
         <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
-        <strong><%= comment.user.name %></strong>
+        <%# <%= comment.user.name %> %>
         <p><%= comment.content %></p>
         <p><%= link_to "コメント編集", edit_special_comment_path(special, comment), remote: true %></p>
         <!-- 追記 -->

@@ -33,7 +33,7 @@ class SpecialsController < ApplicationController
   def show
     @special = Special.find(params[:id])
     @favorite = current_user.favorites.find_by(special_id: @special.id)
-    @comments = @special.comments.includes(:user).all
+    @comments = @special.comments
     @comment = @special.comments.build
   end
   def destroy

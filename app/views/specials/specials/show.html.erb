@@ -1,0 +1,33 @@
+<h1>優待記事詳細画面</h1>
+<p>優待製品名：<%= @special.product %></p>
+<p>会社名：<%= @special.company %></p>
+<p>写真：<%= image_tag(@special.image.url) if @special.image && @special.image.url %></p>
+<p>優待解説：<%= @special.detail %></p>
+<p>PER：<%= @special.per %></p>
+<p>割安状況：<%= @special.status %></p>
+<p>100株の取得価格：<%= @special.price %></p>
+
+
+  <% if @favorite.present? %>
+    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to 'お気に入りする', favorites_path(special_id: @special.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+
+
+<%= link_to "優待記事一覧画面にもどる", specials_path %>
+<div>
+  <td><%= link_to "編集する", "/specials/#{@special.id}/edit" %></td>
+  <td><%= link_to '削除する', special_path, method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+</div>
+<p>コメント一覧（ここから下の内容が重要）</p>
+<!-- このcomments_areaというHTMLのidを取得して、そのdivの部分だけを更新する -->
+<div id="comments_area">
+  <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+  <%= render partial: 'comments/index', locals: { comments: @comments, special: @special } %>
+</div>
+<!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+<%= render partial: 'comments/form', locals: { comment: @comment, special: @special } %>
+<%= link_to '編集', edit_special_path(@special) %> |
+<%= link_to '戻る', specials_path %>
+</div>

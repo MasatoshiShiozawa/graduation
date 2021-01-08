@@ -1,0 +1,19 @@
+<h1>優待一覧</h1>
+<% if user_signed_in? %>
+ようこそ<%= current_user.name %>さん
+<% end %>
+<% @specials.each do |special| %>
+<p>優待製品名：<%= special.product %></p>
+<p>会社名：<%= special.company %></p>
+<p>写真：<%= image_tag special.image.url ,class: "special_image" if special.image? %></p>
+<p>優待解説：<%= special.detail %></p>
+<p>PER：<%= special.per %></p>
+<p>割安状況：<%= special.status %></p>
+<p>100株の取得価格：<%= special.price %></p>
+<%= link_to '詳細を確認する', special_path(special.id) %><br>
+<% if current_user.try(:admin?) %>
+<%= link_to '編集', edit_special_path(special) %>
+<%= link_to '削除', special, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<% end %>
+<%= link_to '新しく優待を投稿する', new_special_path %>
