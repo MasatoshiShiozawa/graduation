@@ -23,7 +23,7 @@ class SpecialsController < ApplicationController
     end
   end
   def update
-    @special = Special.find(params[:id])
+    @special = Special.includes(:user).find(params[:id])
     if @special.update(special_params)
       redirect_to specials_path, notice: "優待記事を編集しました！"
     else
@@ -35,6 +35,7 @@ class SpecialsController < ApplicationController
     @favorite = current_user.favorites.find_by(special_id: @special.id)
     @comments = @special.comments
     @comment = @special.comments.build
+    @suiis = @special.suiis
   end
   def destroy
     @special.destroy
