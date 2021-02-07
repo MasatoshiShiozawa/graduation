@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_special, only: [:create, :edit, :update]
   def create
     @special = Special.find(params[:special_id])
     @comment = @special.comments.build(comment_params)
@@ -7,13 +8,17 @@ class CommentsController < ApplicationController
       if @comment.save!
         format.js { render :index }
       else
-        format.html { redirect_to special_path(@special), notice: I18n.t('views.messages.failed_to_post') }
+        format.html { redirect_to special_path(@special), notice: I18n.t('views.messages.failed_to_special') }
       end
     end
   end
 
   def edit
-    @comment = Comment.find(params[:id])
+    @comment = @special.comments.find(params[:id])
+    respond_to do |format|
+      flash.now[:notice] = 'コメントの編集中'
+      format.js { render :edit }
+    end
   end
 
   def update
@@ -34,6 +39,9 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:special_id, :content, :special_id)
+    params.require(:comment).permit(:special_id, :content)
+  end
+  def set_special
+    @special = Special.find(params[:special_id])
   end
 end

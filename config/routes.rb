@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :favorites, only: [:create, :destroy]
+  resources :special_category_relations, only: [:new]
   root 'specials#index'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

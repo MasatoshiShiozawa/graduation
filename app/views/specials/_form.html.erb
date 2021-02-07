@@ -33,11 +33,20 @@
   </div>
   <div class="special_title">
     <%= form.label :"割安状況" %>
-    <%= form.text_field :status %>
+    <%= form.select :status, [["割安", "割安"], ["並", "並"], ["割高", "割高"]], include_blank: "選択して下さい" %>
   </div>
   <div class="special_title">
     <%= form.label :"100株の取得価格" %>
     <%= form.text_field :price %>
+  </div>
+  <div>
+    <%= form.label :category, 'カテゴリ' %>
+    <%= form.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+      <%= category.label do %>
+        <%= category.check_box %>
+        <%= category.text %>
+      <% end %>
+    <% end %>
   </div>
   <%= form.submit %>
 <% end %>

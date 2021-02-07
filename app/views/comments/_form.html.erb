@@ -10,10 +10,10 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+        <%= form.label :あなたのコメントを書きましょう %>
+    　　<%= form.text_area :content, size: "110x3" %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    　　<%= form.submit value="コメントを登録する" %>
   </div>
 <% end %>

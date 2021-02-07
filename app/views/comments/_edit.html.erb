@@ -10,9 +10,8 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.text_area :content, id: "comment_content_#{special.id}" %>
-    <%= form.label :nickname %>
-    <%= form.label :content %>
+    <%= form.text_area :content, id: "comment_content_#{special.id}", size: "90x3"  %>
+    <%= form.label :' ' %>
   </div>
   <div class="actions">
     <%= form.submit %>

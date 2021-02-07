@@ -1,50 +1,57 @@
-<h1>優待記事詳細画面</h1>
-
-<div class="row">
-  <div id="sidebar" class="col-sm-4 col-xs-4" style="background: #eeeeee;">
-    <div>サイドバー</div>
-    <div>サイドバー</div>
-    <div>サイドバー</div>
-    <div>サイドバー</div>
-    <div>サイドバー</div>
-    <div>サイドバー</div>
-  </div>
+<div class="container">
+<!-- <img src="/assets/logo.jpg" alt="" width="292" height="75"><br> -->
+<% if user_signed_in? %>
+ようこそ！<%= current_user.name %>さん<br>
+<% end %>
+  <div class="row">
+    <div id="sidebar" class="col-sm-2 col-xs-2 col-md-2 col-lg-2" style="background: #FFFFFF;">
+      ■■カテゴリ一覧<br><br>
+      <% @categories.each do |category| %>
+        　<%= link_to category.name, specials_path(category_id: category.id) %><br>
+      <% end %>
+    </div>
 
   <!-- コンテンツ -->
-  <div id="contents" class="col-sm-8 col-xs-8" style="background: #eeeeee;">
-    <% if @favorite.present? %>
-      <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
-    <% else %>
-      <%= link_to 'お気に入りする', favorites_path(special_id: @special.id), method: :post, class: 'btn btn-primary' %>
-    <% end %>
-    <table class="table table-hover">
-      <tr><th>商品名</th><td><%= @special.product %></td></tr>
-      <tr><th>会社名</th><td><%= @special.company %></td></tr>
-      <tr><th>写真</th><td><%= image_tag(@special.image.url) if @special.image && @special.image.url %></td></tr>
-      <tr><th>解説</th><td><%= @special.detail %></td></tr>
-      <tr><th>100株の取得価格</th><td><%= @special.price %></td></tr>
-      <tr><th>PER</th><td><%= @special.per %></td></tr>
-      <tr><th>割安状況</th><td><%= @special.status %></td></tr>
-    </table>
-    <%= line_chart @suiis.group(:date_friday).sum(:weekly_closing_price) %>
-    <div id="comments_area">
+    <div id="contents" class="col-sm-9 col-xs-9 col-md-9 col-lg-9" style="background: #FFFFFF;">
+      <% if @favorite.present? %>
+        <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+      <% else %>
+        <%= link_to 'お気に入りする', favorites_path(special_id: @special.id), method: :post, class: 'btn btn-primary' %>
+      <% end %>
+      <table class="table table-hover">
+        <tr><th>商品名</th><td><%= @special.product %></td></tr>
+        <tr><th>会社名</th><td><%= @special.company %></td></tr>
+        <tr><th>写真</th><td><%= image_tag(@special.image.url) if @special.image && @special.image.url %></td></tr>
+        <tr><th>解説</th><td><%= @special.detail %></td></tr>
+        <tr><th>100株の取得価格</th><td><%= @special.price %></td></tr>
+        <tr><th>PER</th><td><%= @special.per %><br><span class="badge badge-danger"><%= @special.status %></span></td></tr>
+        <tr><th>カテゴリ</th><td>
+        <% @special.categories.each do |category| %>
+          <%= category.name %>
+        <% end %>
+        </td></tr>
+      </table>
+      ■株価の推移（100株の価格）
+      <%= line_chart @suiis.group(:date_friday).sum(:weekly_closing_price), min: nil %>
+      <hr noshade>
+      <img src="/assets/a_company.jpg" alt="" width="141" height="50">  <img src="/assets/b_company.jpg" alt="" width="141" height="50"><br>
+      <hr noshade>
+      <div id="comments_area">
+        <%= render partial: 'comments/form', locals: { comment: @comment, special: @special } %>
+        <hr noshade>
       <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
-      <%= render partial: 'comments/index', locals: { comments: @comments, special: @special } %>
-    </div>
+        <%= render partial: 'comments/index', locals: { comments: @comments, special: @special } %>
+      </div>
+      <hr noshade>
     <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
-    <%= render partial: 'comments/form', locals: { comment: @comment, special: @special } %>
-    <%= link_to "優待記事一覧画面にもどる", specials_path %>
-    <div>
-      <% if current_user.try(:admin?) %>
-      <td><%= link_to "編集する", "/specials/#{@special.id}/edit" %></td>
-      <td><%= link_to '削除する', special_path, method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-      <% end %>
-    </div>
-    <div>
-      <% @suiis.each do |suii| %>
-          <%= suii.date_friday %>
-          <%= suii.weekly_closing_price %>
-      <% end %>
+
+      <%= link_to "優待記事一覧画面にもどる", specials_path %>
+      <div>
+        <% if current_user.try(:admin?) %>
+        <td><%= link_to "編集する", "/specials/#{@special.id}/edit" %></td>
+        <td><%= link_to '削除する', special_path, method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

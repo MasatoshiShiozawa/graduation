@@ -1,7 +1,14 @@
+<div class="container">
+  <div id="contents" class="col-sm-9 col-xs-9 col-md-9 col-lg-9" style="background: #FFFFFF;">
 <h2><%= t('.title', resource: resource.model_name.human) %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :"名前" %><br />
+    <%= f.text_field :name %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -41,3 +48,5 @@
 <p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
 
 <%= link_to t('devise.shared.links.back'), :back %>
+</div>
+</div>
