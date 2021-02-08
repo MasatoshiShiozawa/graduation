@@ -1,2 +1,3 @@
 $("#comments_area").html("<%= j(render 'comments/index', { comments: @comment.special.comments, special: @comment.special }) %>")
-$("textarea").val('')
+$("textarea").val('');
+$("#notice").html("<%= j flash[:notice] %>");

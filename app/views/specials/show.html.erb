@@ -2,6 +2,7 @@
 <!-- <img src="/assets/logo.jpg" alt="" width="292" height="75"><br> -->
 <% if user_signed_in? %>
 ようこそ！<%= current_user.name %>さん<br>
+<p><%= notice %></p>
 <% end %>
   <div class="row">
     <div id="sidebar" class="col-sm-2 col-xs-2 col-md-2 col-lg-2" style="background: #FFFFFF;">
@@ -21,7 +22,7 @@
       <table class="table table-hover">
         <tr><th>商品名</th><td><%= @special.product %></td></tr>
         <tr><th>会社名</th><td><%= @special.company %></td></tr>
-        <tr><th>写真</th><td><%= image_tag(@special.image.url) if @special.image && @special.image.url %></td></tr>
+        <tr><th>写真</th><td><%= image_tag @special.image.url ,class: "show_image" if @special.image? %></td></tr>
         <tr><th>解説</th><td><%= @special.detail %></td></tr>
         <tr><th>100株の取得価格</th><td><%= @special.price %></td></tr>
         <tr><th>PER</th><td><%= @special.per %><br><span class="badge badge-danger"><%= @special.status %></span></td></tr>

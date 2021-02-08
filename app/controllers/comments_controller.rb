@@ -5,8 +5,9 @@ class CommentsController < ApplicationController
     @comment = @special.comments.build(comment_params)
     @comment.user_id = current_user.id
     respond_to do |format|
-      if @comment.save!
-        format.js { render :index }
+      if @comment.save
+        format.html { redirect_to @special, notice: 'コメントが登録されました。' }
+        # format.js { render :index }
       else
         format.html { redirect_to special_path(@special), notice: I18n.t('views.messages.failed_to_special') }
       end

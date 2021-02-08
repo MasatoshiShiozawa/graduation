@@ -18,6 +18,15 @@
       <p>PER：<%= @special.per %></p>
       <p>割安状況：<%= @special.status %></p>
       <p>100株の取得価格：<%= @special.price %></p>
+      <p><%= form.label :category, 'カテゴリ' %>
+      <%= form.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+        <%= category.label do %>
+          <%= category.check_box %>
+          <%= category.text %>
+        <% end %>
+      <% end %>
+      </p>
+      <!-- <p>カテゴリー：<% @special.categories.each do |category| %><%= category.name %><% end %></p> -->
 
       <%= form.submit "登録する" %>
       <%= form.submit "戻る", name: 'back' %>
