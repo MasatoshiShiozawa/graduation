@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to @special, notice: 'コメントが登録されました。' }
         # format.js { render :index }
       else
-        format.html { redirect_to special_path(@special), notice: I18n.t('views.messages.failed_to_special') }
+        format.html { redirect_to special_path(@special), notice: 'コメントが登録できませんでした。' }
       end
     end
   end
@@ -25,7 +25,12 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @special = @comment.special
-    redirect_to special_path(@special) if @comment.update(comment_params)
+    if @comment.update(comment_params)
+      redirect_to special_path(@special), notice: 'コメントが更新されました。'
+    else
+      flash.now[:notice] = 'コメントの編集に失敗しました'
+      format.js { render :edit_error }
+    end
   end
 
   def destroy
