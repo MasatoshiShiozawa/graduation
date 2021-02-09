@@ -3,7 +3,6 @@ class Special < ApplicationRecord
     validates :company, presence: true
     validates :detail, presence: true
     validates :per, numericality: { :greater_than => 0 }
-    validates :category, acceptance: true
     validates :status, presence: true
     validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
