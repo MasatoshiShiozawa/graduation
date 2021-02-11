@@ -25,10 +25,12 @@
     <div id="contents" class="col-sm-9 col-xs-9 col-md-9 col-lg-9" style="background: #FFFFFF;">
       <% if user_signed_in? %>
         <%= link_to "▼PER低い順でソート", specials_path(sort_per_low: "true") %>　　　
-        <%= link_to "▼取得価格順にソート", specials_path(sort_price_low: "true") %>
+        <%= link_to "▼取得価格順にソート", specials_path(sort_price_low: "true") %>　　　
+        <%= link_to "▼お気に入りを表示", specials_path(my_favorite: "true") %>
       <% else %>
         ▼PER低い順でソート（ログイン時のみ利用可能）　　　
-        ▼取得価格順にソート（ログイン時のみ利用可能）
+        ▼取得価格順にソート（ログイン時のみ利用可能）　　　
+        ▼お気に入りを表示（ログイン時のみ利用可能）
       <% end %>
       <table class="table table-hover">
         <thead>

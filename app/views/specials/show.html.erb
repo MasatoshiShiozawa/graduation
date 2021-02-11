@@ -37,10 +37,11 @@
       <hr noshade>
       <img src="/assets/a_company.jpg" alt="" width="141" height="50">  <img src="/assets/b_company.jpg" alt="" width="141" height="50"><br>
       <hr noshade>
-      <div id="comments_area">
+
         <%= render partial: 'comments/form', locals: { comment: @comment, special: @special } %>
         <hr noshade>
       <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+      <div id="comments_area">
         <%= render partial: 'comments/index', locals: { comments: @comments, special: @special } %>
       </div>
       <hr noshade>

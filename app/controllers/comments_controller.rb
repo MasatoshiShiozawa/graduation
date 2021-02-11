@@ -6,8 +6,8 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @special, notice: 'コメントが登録されました。' }
-        # format.js { render :index }
+        # format.html { redirect_to @special, notice: 'コメントが登録されました。' }
+        format.js { render :index }
       else
         format.html { redirect_to special_path(@special), notice: 'コメントが登録できませんでした。' }
       end
@@ -23,13 +23,17 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    @special = @comment.special
-    if @comment.update(comment_params)
-      redirect_to special_path(@special), notice: 'コメントが更新されました。'
-    else
-      flash.now[:notice] = 'コメントの編集に失敗しました'
-      format.js { render :edit_error }
+    @comment = @special.comments.find(params[:id])
+    # @special = @comment.special
+    respond_to do |format|
+      if @comment.update(comment_params)
+        # redirect_to special_path(@special), notice: 'コメントが更新されました。'
+        flash.now[:notice] = 'コメントが編集されました'
+        format.js { render :index }
+      else
+        flash.now[:notice] = 'コメントの編集に失敗しました'
+        format.js { render :edit_error }
+      end
     end
   end
 

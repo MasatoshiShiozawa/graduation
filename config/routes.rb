@@ -9,10 +9,9 @@ Rails.application.routes.draw do
     member do
       patch :confirm
     end
-  end
-  resources :specials do
     resources :comments
   end
+
   resources :favorites, only: [:create, :destroy]
   resources :special_category_relations, only: [:new]
   root 'specials#index'

@@ -24,6 +24,14 @@ class SpecialsController < ApplicationController
       @specials = Special.page(params[:page]).per(PER)
       @specials = @specials.order(price: :asc)
     end
+
+    if params[:my_favorite]
+      @user = current_user
+      @favorites = current_user.favorite_specials.all
+      @specials = @favorites.page(params[:page]).per(PER)
+    end
+
+
   end
 
   def new
